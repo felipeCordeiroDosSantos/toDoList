@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>tdl</title>
+    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    
     <h1>To Do List</h1>
-    <div><%= list %></div>
+
+    <div id="listarId">
+      <% for (let p = 0; p < getDB.length; p++) { %>
+        <br> <%= getDB[p] %>
+      <% } %>
+    </div>
+
+    <br><br>
+    
+    <input type="text" name="adicionarName" id="adicionarId">
+    <input type="button" value="Adicionar" onclick="addFunction()">
+    <input type="button" value="Atualizar" onclick="upFunction()">
+
+    <br><br>
+
+    <input type="number" name="indiceName" id="indiceId">
+    <input type="button" value="Deletar" onclick="dellFunction()">
+    
+    <script>
+      function addFunction() {
+        let addVariable = document.querySelector('#adicionarId').value
+        const addData = { addVariable }
+        const addOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(addData)
+        };
+        fetch('/adicionar', addOptions)
+      }
+
+      function upFunction() {
+        let upVariableA = document.querySelector('#adicionarId').value
+        let upVariableI = document.querySelector('#indiceId').value
+        const upData = { upVariableA, upVariableI }
+        const upOptions = {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(upData)
+        };
+        fetch('/editar', upOptions)
+      }
+
+      function dellFunction() {
+        let dellVariable = document.querySelector('#indiceId').value
+        const dellData = { dellVariable }
+        const dellOptions = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dellData)
+        };
+        fetch('/deletar', dellOptions)
+      }
+    </script>   
   </body>
 </html>

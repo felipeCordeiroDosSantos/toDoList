@@ -1,21 +1,34 @@
 const express = require('express');
 const router = express.Router();
 
-const list = require('./list')
-const db = require('./db')
+const db = require('../modules/db');
+const { getDB } = require('../modules/db');
 
 /* GET home page. */
+
 router.get('/', function(req, res, next) {
-  res.render('index', { list: list.listing() });
+  res.render('index', { 
+    title: 'tdl',
+    getDB: db.getDB()
+  });
+});
+
+router.post('/adicionar', function(req, res, next) {
+  console.log(req.body.addVariable)
+  let addParameter = req.body.addVariable
+  db.add(addParameter)
+});
+
+router.put('/editar', function(req, res, next) {
+  let upParameterA = req.body.upVariableA
+  let upParameterI = req.body.upVariableI
+  db.update(upParameterI, upParameterA)
+});
+
+router.delete('/deletar', function(req, res, next) {
+  console.log(req.body.dellVariable)
+  let dellParameter = req.body.dellVariable
+  db.delete(dellParameter)
 });
 
 module.exports = router;
-
-console.log(list.add('Tarefa 1'))
-console.log(list.add('Tarefa 2'))
-console.log(list.add('Tarefa 3'))
-console.log(list.add('Tarefa 4'))
-console.log(list.add('Tarefa 5'))
-console.log(list.update(1, 'Outra tarefa 2'))
-console.log(list.update(3, 'Outra tarefa 4'))
-console.log(list.delete(2))
