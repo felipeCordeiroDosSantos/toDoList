@@ -4,6 +4,8 @@ const router = express.Router();
 const db = require('../modules/db');
 const { getDB } = require('../modules/db');
 
+const controllerRoutes = require('../controller/controllerRoutes')
+
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
@@ -13,22 +15,10 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post('/adicionar', function(req, res, next) {
-  console.log(req.body.addVariable)
-  let addParameter = req.body.addVariable
-  db.add(addParameter)
-});
+router.post('/adicionar', controllerRoutes.routeAdd)
 
-router.put('/editar', function(req, res, next) {
-  let upParameterA = req.body.upVariableA
-  let upParameterI = req.body.upVariableI
-  db.update(upParameterI, upParameterA)
-});
+router.put('/editar', controllerRoutes.routeUp)
 
-router.delete('/deletar', function(req, res, next) {
-  console.log(req.body.dellVariable)
-  let dellParameter = req.body.dellVariable
-  db.delete(dellParameter)
-});
+router.delete('/deletar', controllerRoutes.routeDell)
 
 module.exports = router;

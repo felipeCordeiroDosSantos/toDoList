@@ -6,7 +6,7 @@
   </head>
   <body>
     
-    <h1>To Do List</h1>
+    <h1><%= title %> </h1>
 
     <div id="listarId">
       <% for (let p = 0; p < getDB.length; p++) { %>
@@ -16,12 +16,14 @@
 
     <br><br>
     
+    Tarefa:
     <input type="text" name="adicionarName" id="adicionarId">
     <input type="button" value="Adicionar" onclick="addFunction()">
-    <input type="button" value="Atualizar" onclick="upFunction()">
+    <input type="button" value="Editar" onclick="upFunction()">
 
     <br><br>
 
+    Indice:
     <input type="number" name="indiceName" id="indiceId">
     <input type="button" value="Deletar" onclick="dellFunction()">
     
