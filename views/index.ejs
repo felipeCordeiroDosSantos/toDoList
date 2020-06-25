@@ -5,30 +5,39 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    
     <h1><%= title %> </h1>
-
-    <div id="listarId">
-      <% for (let p = 0; p < getDB.length; p++) { %>
-        <br> <%= getDB[p] %>
-      <% } %>
-    </div>
 
     <br><br>
     
     Tarefa:
-    <input type="text" name="adicionarName" id="adicionarId">
+    <input type="text" id="adicionarId">
     <input type="button" value="Adicionar" onclick="addFunction()">
-    <input type="button" value="Editar" onclick="upFunction()">
+    <input type="button" value="Listar" onclick="listagem()">
 
-    <br><br>
+    <br><br><br><br>
 
-    Indice:
-    <input type="number" name="indiceName" id="indiceId">
-    <input type="button" value="Deletar" onclick="dellFunction()">
-    
+    <div id="listaId"> 
+      
+    </div>
+
     <script>
-      function addFunction() {
+      function listagem() {
+        let listJson = JSON.parse('<%- JSON.stringify(getDB) %>')
+        console.log(listJson)
+        
+        let listId = document.querySelector('#listaId')
+        listId.innerHTML = ''
+        for (let j = 0; j < listJson.length; j++) {
+          listId.innerHTML += `${listJson[j]}  
+          <input type="button" value="Deletar" onclick="dellFunction(${j})">
+          Editar:
+          <input type="text" id="editarId${j}">
+          <input type="button" value="Ok" onclick="upFunction(${j})">
+          <br><br>`
+        }
+      }
+
+      function addToDoList() {
         let addVariable = document.querySelector('#adicionarId').value
         const addData = { addVariable }
         const addOptions = {
@@ -41,9 +50,9 @@
         fetch('/adicionar', addOptions)
       }
 
-      function upFunction() {
-        let upVariableA = document.querySelector('#adicionarId').value
-        let upVariableI = document.querySelector('#indiceId').value
+      function upFunction(upP) {
+        let upVariableA = document.querySelector(`#editarId${upP}`).value
+        let upVariableI = upP
         const upData = { upVariableA, upVariableI }
         const upOptions = {
           method: 'PUT',
@@ -55,8 +64,8 @@
         fetch('/editar', upOptions)
       }
 
-      function dellFunction() {
-        let dellVariable = document.querySelector('#indiceId').value
+      function dellFunction(dellP) {
+        let dellVariable = dellP
         const dellData = { dellVariable }
         const dellOptions = {
           method: 'DELETE',
