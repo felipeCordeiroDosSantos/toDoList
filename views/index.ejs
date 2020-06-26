@@ -2,80 +2,19 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/js/script.js"> </script>
+    <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    <h1><%= title %> </h1>
-
-    <br><br>
-    
-    Tarefa:
-    <input type="text" id="adicionarId">
-    <input type="button" value="Adicionar" onclick="addFunction()">
-    <input type="button" value="Listar" onclick="listagem()">
-
-    <br><br><br><br>
-
-    <div id="listaId"> 
+    <div class="container">
+      <h2>To Do List</h2>
       
-    </div>
+      <h3>Tarefa:</h3>
+      <input type="text" id="task">
+      <input type="button" value="Adicionar" onclick="addTaskToDoList()">
+      <input type="button" value="Listar" onclick="listToDoList('<%= list %>')">
 
-    <script>
-      function listagem() {
-        let listJson = JSON.parse('<%- JSON.stringify(getDB) %>')
-        console.log(listJson)
-        
-        let listId = document.querySelector('#listaId')
-        listId.innerHTML = ''
-        for (let j = 0; j < listJson.length; j++) {
-          listId.innerHTML += `${listJson[j]}  
-          <input type="button" value="Deletar" onclick="dellFunction(${j})">
-          Editar:
-          <input type="text" id="editarId${j}">
-          <input type="button" value="Ok" onclick="upFunction(${j})">
-          <br><br>`
-        }
-      }
-
-      function addToDoList() {
-        let addVariable = document.querySelector('#adicionarId').value
-        const addData = { addVariable }
-        const addOptions = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(addData)
-        };
-        fetch('/adicionar', addOptions)
-      }
-
-      function upFunction(upP) {
-        let upVariableA = document.querySelector(`#editarId${upP}`).value
-        let upVariableI = upP
-        const upData = { upVariableA, upVariableI }
-        const upOptions = {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(upData)
-        };
-        fetch('/editar', upOptions)
-      }
-
-      function dellFunction(dellP) {
-        let dellVariable = dellP
-        const dellData = { dellVariable }
-        const dellOptions = {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(dellData)
-        };
-        fetch('/deletar', dellOptions)
-      }
-    </script>   
+      <div id="listTasks"> </div>
+    </div>  
   </body>
 </html>

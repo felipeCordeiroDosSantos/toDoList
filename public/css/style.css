@@ -1,0 +1,23 @@
+body {
+    background: #fff;
+    color: #333;
+    font-family: Lato, sans-serif;
+    background-color: #e4e4e4;
+  }
+  .container {
+    display: block;
+    width: 550px;
+    margin: 10px auto 100px;
+    background-color:#fff;
+    padding:0px 10px 10px 10px;
+    border-radius:10px
+  }
+  h2 {
+    text-align:center;
+    padding-top:10px;
+    margin-bottom:0px;
+  }
+  h3 {
+    clear: both;
+    list-style: none;
+  }

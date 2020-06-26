@@ -3,7 +3,7 @@ let list = []
 module.exports = {
     populate: function() {
         for (let i = 1; i <= 10; i++) {
-            this.add(`Tarefa ${i}`)
+            this.add(`Tarefa: ${i}`)
         }
     },
 
@@ -11,15 +11,15 @@ module.exports = {
         return list
     },
 
-    add: function(tarefa) {
-        list.push(String(tarefa))
+    add: function(task) {
+        list.push(String(task))
     },
 
-    update: function(indice, tarefa) {
-        list[indice] = tarefa
+    update: function(index, task) {
+        list[index] = task
     },
 
-    delete: function(indice) {
-        list.splice(indice, 1)
+    delete: function(index) {
+        list.splice(index, 1)
     }
 }
