@@ -1,15 +1,20 @@
 function listToDoList(listTasksString) {
   let listTasksArray = listTasksString.split(',')
-  let listTasks = document.querySelector('#listTasks')
-  listTasks.innerHTML = ''
+  let listToDoList = document.querySelector('#toDoList')
+  listToDoList.innerHTML = ''
   for (let j = 0; j < listTasksArray.length; j++) {
-    listTasks.innerHTML += `${listTasksArray[j]}  
-    <input type="button" value="Deletar" onclick="deleteTaskToDoList(${j})">
-    Editar:
-    <input type="text" id="task${j}">
-    <input type="button" value="Ok" onclick="updateTaskToDoList(${j})">
-    <br><br>`
+    listToDoList.innerHTML += `${listTasksArray[j]}  
+      <input type="button" value="Deletar" onclick="deleteTaskToDoList(${j})">
+      <input type="button" value="Editar" onclick="expnadInputEdit(${j})">
+      <p id="edit${j}"></p>`
   }
+}
+
+function expnadInputEdit(taskIndex) {
+  let index = document.querySelector(`#edit${taskIndex}`)
+  index.innerHTML = ''
+  index.innerHTML += `<input type="text" id="task${taskIndex}"></input>
+    <input type="button" value="Ok" onclick="updateTaskToDoList(${taskIndex})">`
 }
 
 function addTaskToDoList() {
@@ -23,6 +28,7 @@ function addTaskToDoList() {
     body: JSON.stringify(data)
   };
   fetch('/adicionar', options)
+  refreshPage()
 }
 
 function updateTaskToDoList(taskIndex) {
@@ -37,6 +43,9 @@ function updateTaskToDoList(taskIndex) {
     body: JSON.stringify(data)
   };
   fetch('/editar', options)
+  let editInputs = document.querySelector(`#edit${taskIndex}`)
+  editInputs.innerHTML = ''
+  refreshPage()
 }
 
 function deleteTaskToDoList(taskIndex) {
@@ -50,4 +59,9 @@ function deleteTaskToDoList(taskIndex) {
     body: JSON.stringify(data)
   };
   fetch('/deletar', options)
+  refreshPage()
+}
+
+function refreshPage(){
+  setTimeout("location.reload(true);",100);
 }
