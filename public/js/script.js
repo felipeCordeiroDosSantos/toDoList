@@ -3,7 +3,7 @@ function listToDoList(listTasksText) {
   let toDoList = document.querySelector('#list')
   toDoList.innerHTML = ''
   for (let j = 1; j < listTasksArray.length; j++) {
-    toDoList.innerHTML += `${listTasksArray[j]}  
+    toDoList.innerHTML += `Tarefa ${j}: ${listTasksArray[j]}  
       <input type="button" value="Deletar" class="delete" onclick="deleteTaskToDoList(${j})">
       <input type="button" value="Editar" class="edit" onclick="expnadInputEdit(${j})">
       <p id="edit${j}"></p>`
@@ -12,9 +12,12 @@ function listToDoList(listTasksText) {
 
 function expnadInputEdit(taskIndex) {
   let index = document.querySelector(`#edit${taskIndex}`)
-  index.innerHTML = ''
-  index.innerHTML += `Editar tarefa: <input type="text" id="task${taskIndex}"></input>
+  if (index.innerHTML == '') {
+    index.innerHTML += `Editar tarefa: <input type="text" id="task${taskIndex}"></input>
     <input type="button" value="Confirmar" onclick="updateTaskToDoList(${taskIndex})">`
+  } else {
+    index.innerHTML = ''
+  }
 }
 
 function addTaskToDoList() {
@@ -80,6 +83,21 @@ function deleteTaskToDoList(taskIndex) {
       alert('Erro no servidor!')
     }
   })
+  refreshPage()
+}
+
+function changeTaskToDoList() {
+  let newTask = document.querySelector('#task').value
+  let index = document.querySelector('#index').value
+  const data = { newTask, index }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+  fetch('/mudar', options)
   refreshPage()
 }
 

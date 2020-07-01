@@ -2,7 +2,7 @@ let list = [0]
 
 function populate() {
     for (let i = 1; i <= 10; i++) {
-        this.add(`Tarefa: ${i}`)
+        this.add(`Fazer ${i}`)
     }
 }
 
@@ -21,5 +21,8 @@ module.exports = {
     },
     delete: function(index) {
         list.splice(index, 1)
-    }
+    },
+    change: function(index, task) {
+        list.splice(index, 0, task)
+    } 
 }

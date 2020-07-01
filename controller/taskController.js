@@ -1,4 +1,5 @@
 const db = require('../modules/db')
+const { change } = require('../modules/db')
 
 module.exports = {
     addTask: function(req, res) {
@@ -13,5 +14,10 @@ module.exports = {
     deleteTask: function(req, res) {
         let index = req.body.index
         db.delete(index)
+    },
+    changeTask: function(req, res) {
+        let newTask = req.body.newTask
+        let index = req.body.index
+        db.change(index, newTask)
     }
 }

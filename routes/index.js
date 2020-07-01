@@ -21,4 +21,6 @@ router.put('/editar', taskController.updateTask)
 
 router.delete('/deletar', taskController.deleteTask)
 
+router.post('/mudar', taskController.changeTask)
+
 module.exports = router;
