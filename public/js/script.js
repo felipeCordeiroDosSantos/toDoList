@@ -1,11 +1,11 @@
-function listToDoList(listTasksString) {
-  let listTasksArray = listTasksString.split(',')
-  let listToDoList = document.querySelector('#toDoList')
-  listToDoList.innerHTML = ''
-  for (let j = 0; j < listTasksArray.length; j++) {
-    listToDoList.innerHTML += `${listTasksArray[j]}  
-      <input type="button" value="Deletar" onclick="deleteTaskToDoList(${j})">
-      <input type="button" value="Editar" onclick="expnadInputEdit(${j})">
+function listToDoList(listTasksText) {
+  let listTasksArray = listTasksText.split(',')
+  let toDoList = document.querySelector('#list')
+  toDoList.innerHTML = ''
+  for (let j = 1; j < listTasksArray.length; j++) {
+    toDoList.innerHTML += `${listTasksArray[j]}  
+      <input type="button" value="Deletar" class="delete" onclick="deleteTaskToDoList(${j})">
+      <input type="button" value="Editar" class="edit" onclick="expnadInputEdit(${j})">
       <p id="edit${j}"></p>`
   }
 }
@@ -13,8 +13,8 @@ function listToDoList(listTasksString) {
 function expnadInputEdit(taskIndex) {
   let index = document.querySelector(`#edit${taskIndex}`)
   index.innerHTML = ''
-  index.innerHTML += `<input type="text" id="task${taskIndex}"></input>
-    <input type="button" value="Ok" onclick="updateTaskToDoList(${taskIndex})">`
+  index.innerHTML += `Editar tarefa: <input type="text" id="task${taskIndex}"></input>
+    <input type="button" value="Confirmar" onclick="updateTaskToDoList(${taskIndex})">`
 }
 
 function addTaskToDoList() {
@@ -28,6 +28,13 @@ function addTaskToDoList() {
     body: JSON.stringify(data)
   };
   fetch('/adicionar', options)
+  .then(function(res) {
+    if (res.status >= 400 && res.status <= 499) {
+      alert('Erro no cliente!')
+    } else if (res.status >= 500 && res.status <= 599) {
+      alert('Erro no servidor!')
+    }
+  })
   refreshPage()
 }
 
@@ -43,6 +50,13 @@ function updateTaskToDoList(taskIndex) {
     body: JSON.stringify(data)
   };
   fetch('/editar', options)
+  .then(function(res) {
+    if (res.status >= 400 && res.status <= 499) {
+      alert('Erro no cliente!')
+    } else if (res.status >= 500 && res.status <= 599) {
+      alert('Erro no servidor!')
+    }
+  })
   let editInputs = document.querySelector(`#edit${taskIndex}`)
   editInputs.innerHTML = ''
   refreshPage()
@@ -59,6 +73,13 @@ function deleteTaskToDoList(taskIndex) {
     body: JSON.stringify(data)
   };
   fetch('/deletar', options)
+  .then(function(res) {
+    if (res.status >= 400 && res.status <= 499) {
+      alert('Erro no cliente!')
+    } else if (res.status >= 500 && res.status <= 599) {
+      alert('Erro no servidor!')
+    }
+  })
   refreshPage()
 }
 
