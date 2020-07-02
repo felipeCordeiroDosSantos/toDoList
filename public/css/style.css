@@ -7,7 +7,7 @@ body {
 
 .container {
 	display: block;
-	width: 400px;
+	width: 415px;
 	margin: 10px auto 100px;
 	background-color:#fff;
 	padding:0px 10px 10px 10px;
@@ -48,7 +48,7 @@ input[type="button"] {
 	color: green;
 }
 
-input[type="text"], [type="number"] {
+input[type="text"] {
 	margin: 0;
 	font-size: 12px;
 	line-height: 18px;
@@ -61,7 +61,7 @@ input[type="text"], [type="number"] {
 	color: #888;
 }
 
-input[type="text"], [type="number"]:focus {
+input[type="text"]:focus {
 	color: #333;
 }
 
@@ -73,4 +73,22 @@ h3 {
 	padding: 20px 0 10px;
 	margin: 0;
 	text-transform: uppercase;
+}
+
+#index {
+	margin: 0;
+	font-size: 12px;
+	line-height: 18px;
+	height: 6px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	background: #fff;
+	border-radius: 6px;
+	font-family: Lato, sans-serif;
+	color: #888;
+	width: 40px;
+}
+
+#index:focus {
+	color: #333;
 }
