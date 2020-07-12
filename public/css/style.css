@@ -5,27 +5,36 @@ body {
 	background-color:#e4e4e4;
 }
 
-.container {
+h3 {
+	clear: both;
+	list-style: none;
+	color: #333;
+	font-weight: 700;
+	font-size: 15px;
+	border-bottom: 2px solid #333;
+	padding: 20px 0 10px;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.list {
 	display: block;
-	width: 400px;
+	width: 415px;
 	margin: 10px auto 100px;
 	background-color:#fff;
 	padding:0px 10px 10px 10px;
 	border-radius:10px
 }
 
-h2 {
+
+.list__title {
 	text-align:center;
 	padding-top:10px;
 	margin-bottom:0px;
 }
 
-h3 {
-	clear: both;
-	list-style: none;
-}
 
-input[type="button"] {
+.add {
 	background: none;
 	border: 0px;
 	color: #888;
@@ -36,19 +45,41 @@ input[type="button"] {
 	cursor: pointer;
 }
 
-#add:hover {
+.add:hover {
 	color: #333;
+}
+
+.delete {
+	background: none;
+	border: 0px;
+	color: #888;
+	font-size: 16px;
+	width: 65px;
+	margin: 10px 0 0;
+	font-family: Lato, sans-serif;
+	cursor: pointer;
 }
 
 .delete:hover {
 	color: red;
 }
 
+.edit {
+	background: none;
+	border: 0px;
+	color: #888;
+	font-size: 16px;
+	width: 55px;
+	margin: 10px 0 0;
+	font-family: Lato, sans-serif;
+	cursor: pointer;
+}
+
 .edit:hover {
 	color: green;
 }
 
-input[type="text"], [type="number"] {
+.taskText {
 	margin: 0;
 	font-size: 12px;
 	line-height: 18px;
@@ -61,16 +92,39 @@ input[type="text"], [type="number"] {
 	color: #888;
 }
 
-input[type="text"], [type="number"]:focus {
+.taskText:focus {
 	color: #333;
 }
 
-h3 {
-	color: #333;
-	font-weight: 700;
-	font-size: 15px;
-	border-bottom: 2px solid #333;
-	padding: 20px 0 10px;
+.index {
 	margin: 0;
-	text-transform: uppercase;
+	font-size: 12px;
+	line-height: 18px;
+	height: 6px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	background: #fff;
+	border-radius: 6px;
+	font-family: Lato, sans-serif;
+	color: #888;
+	width: 40px;
+}
+
+.index:focus {
+	color: #333;
+}
+
+.change {
+	background: none;
+	border: 0px;
+	color: #888;
+	font-size: 16px;
+	width: 60px;
+	margin: 10px 0 0;
+	font-family: Lato, sans-serif;
+	cursor: pointer;
+}
+
+.change:hover {
+	color: blue;
 }

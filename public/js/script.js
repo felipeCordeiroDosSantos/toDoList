@@ -1,10 +1,10 @@
 function listToDoList(listTasksText) {
   let listTasksArray = listTasksText.split(',')
-  let toDoList = document.querySelector('#list')
+  let toDoList = document.querySelector('#toDoList')
   toDoList.innerHTML = ''
   for (let j = 1; j < listTasksArray.length; j++) {
     toDoList.innerHTML += `Tarefa ${j}: ${listTasksArray[j]}  
-      <input type="button" value="Deletar" class="delete" onclick="deleteTaskToDoList(${j})">
+      <input type="button" value="Deletar" class="delete" onclick="deleteTask(${j})">
       <input type="button" value="Editar" class="edit" onclick="expnadInputEdit(${j})">
       <p id="edit${j}"></p>`
   }
@@ -14,13 +14,13 @@ function expnadInputEdit(taskIndex) {
   let index = document.querySelector(`#edit${taskIndex}`)
   if (index.innerHTML == '') {
     index.innerHTML += `Editar tarefa: <input type="text" id="task${taskIndex}"></input>
-    <input type="button" value="Confirmar" onclick="updateTaskToDoList(${taskIndex})">`
+    <input type="button" value="Confirmar" onclick="updateTask(${taskIndex})">`
   } else {
     index.innerHTML = ''
   }
 }
 
-function addTaskToDoList() {
+function addTask() {
   let newTask = document.querySelector('#task').value
   const data = { newTask }
   const options = {
@@ -41,7 +41,7 @@ function addTaskToDoList() {
   refreshPage()
 }
 
-function updateTaskToDoList(taskIndex) {
+function updateTask(taskIndex) {
   let newTask = document.querySelector(`#task${taskIndex}`).value
   let index = taskIndex
   const data = { newTask, index }
@@ -65,7 +65,7 @@ function updateTaskToDoList(taskIndex) {
   refreshPage()
 }
 
-function deleteTaskToDoList(taskIndex) {
+function deleteTask(taskIndex) {
   let index = taskIndex
   const data = { index }
   const options = {
@@ -86,7 +86,7 @@ function deleteTaskToDoList(taskIndex) {
   refreshPage()
 }
 
-function changeTaskToDoList() {
+function changeTask() {
   let newTask = document.querySelector('#task').value
   let index = document.querySelector('#index').value
   const data = { newTask, index }
@@ -98,6 +98,13 @@ function changeTaskToDoList() {
     body: JSON.stringify(data)
   };
   fetch('/mudar', options)
+  .then(function(res) {
+    if (res.status >= 400 && res.status <= 499) {
+      alert('Erro no cliente!')
+    } else if (res.status >= 500 && res.status <= 599) {
+      alert('Erro no servidor!')
+    }
+  })
   refreshPage()
 }
 

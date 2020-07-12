@@ -11,20 +11,15 @@
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    <div class="container">
-      <h2>To Do List</h2>
-      
+    <div class="list">
+      <h2 class="list__title">To Do List</h2>
       <h3>Tarefa:</h3>
-      <input type="text" id="task">
-      <input type="button" value="Adicionar" id="add" onclick="addTaskToDoList()">
-      
+      <input type="text" id="task" class="taskText">
+      <input type="button" value="Adicionar" class="add" onclick="addTask()">  
+      <input type="number" class="index">
+      <input type="button" value="Mudar" class="change" onclick="changeTask()">
       <br><br>
-      
-      <input type="number" id="index">
-      <input type="button" value="Mudar" id="change" onclick="changeTaskToDoList()">
-      <br><br>
-
-      <div id="list"> </div>
+      <div id="toDoList"> </div>
     </div>  
   </body>
 </html>
