@@ -96,7 +96,7 @@ h3 {
 	color: #333;
 }
 
-.index {
+.indexNumber {
 	margin: 0;
 	font-size: 12px;
 	line-height: 18px;
@@ -110,7 +110,7 @@ h3 {
 	width: 40px;
 }
 
-.index:focus {
+.indexNumber:focus {
 	color: #333;
 }
 
