@@ -1,29 +1,69 @@
-let list = [0]
+const knex = require('./knex')
+const { where } = require('./knex')
+
+let list = []
+
+function clearList() {
+    list = []
+}
 
 function populate() {
-    for (let i = 1; i <= 10; i++) {
-        this.addTask(`Fazer ${i}`)
-    }
+    knex.select(['id', 'title', 'hour']).table('task').orderBy('hour', 'asc')
+    .then(function (data){
+        console.log(data)
+        for (let i = 0; i < data.length; i++) {
+            list.push(data[i])
+        }
+    }).catch(function (error){
+        console.log(error)
+    }).then( function (){})
 }
 
 function getDB() {
     return list
 }
 
-function addTask(task) {
-    list.push(String(task))
+function addTask(task, hour) {
+    let newtask = {
+        title: task,
+        hour: hour,
+        id_user: 1
+    }
+    
+    knex.insert(newtask).into('task')
+    .then(function (data){
+        console.log(data)  
+    }).catch(function (error) {
+        console.log(error)
+    }).then( function (){
+        clearList()
+        populate()
+    })
+    
 }
 
-function updateTask(index, task) {
-    list[index] = task
-}
+function updateTask(index, task, hour) {
+    knex.where({id: index}).update({title: task, hour: hour}).table('task')
+    .then(function (data){
+        console.log(data)  
+    }).catch(function (error) {
+        console.log(error)
+    }).then( function (){
+        clearList()
+        populate()
+    })
+}   
 
 function deleteTask(index) {
-    list.splice(index, 1)
-}
-
-function changeTask(index, task) {
-    list.splice(index, 0, task)
+    knex.where({id: index}).delete().table('task')
+    .then(function(data){
+        console.log(data)
+    }).catch(function(error){
+        console.log(error)
+    }).then( function (){
+        clearList()
+        populate()
+    })
 }
 
 module.exports = {
@@ -31,6 +71,5 @@ module.exports = {
     getDB,
     addTask,
     updateTask,
-    deleteTask,
-    changeTask
+    deleteTask
 }

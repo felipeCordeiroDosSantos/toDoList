@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>tdl</title>
     <script type="text/javascript" src="/js/script.js"> </script>
     <script type="text/javascript">
       window.onload = function () {
-        listToDoList('<%= list %>')
+        listToDoList(JSON.parse('<%- JSON.stringify(list) %>'))
       }
     </script>
     <link rel='stylesheet' href='/css/style.css' />
@@ -14,10 +14,10 @@
     <div class="list">
       <h2 class="list__title">To Do List</h2>
       <h3>Tarefa:</h3>
-      <input type="text" id="task" class="taskText">
-      <input type="button" value="Adicionar" class="add" onclick="addTask()">  
-      <input type="number" id="index" class="indexNumber">
-      <input type="button" value="Mudar" class="change" onclick="changeTask()">
+      <input type="text" id="task" class="task">
+      Horario:
+      <input type="time" id="hour" class="hour">
+      <input type="button" value="Adicionar" class="add" onclick="addTask()">
       <br><br>
       <div id="toDoList"> </div>
     </div>  

@@ -19,7 +19,7 @@ h3 {
 
 .list {
 	display: block;
-	width: 415px;
+	width: 550px;
 	margin: 10px auto 100px;
 	background-color:#fff;
 	padding:0px 10px 10px 10px;
@@ -79,7 +79,7 @@ h3 {
 	color: green;
 }
 
-.taskText {
+.task {
 	margin: 0;
 	font-size: 12px;
 	line-height: 18px;
@@ -92,11 +92,11 @@ h3 {
 	color: #888;
 }
 
-.taskText:focus {
+.task:focus {
 	color: #333;
 }
 
-.indexNumber {
+.hour {
 	margin: 0;
 	font-size: 12px;
 	line-height: 18px;
@@ -107,24 +107,8 @@ h3 {
 	border-radius: 6px;
 	font-family: Lato, sans-serif;
 	color: #888;
-	width: 40px;
 }
 
-.indexNumber:focus {
+.hour:focus {
 	color: #333;
-}
-
-.change {
-	background: none;
-	border: 0px;
-	color: #888;
-	font-size: 16px;
-	width: 60px;
-	margin: 10px 0 0;
-	font-family: Lato, sans-serif;
-	cursor: pointer;
-}
-
-.change:hover {
-	color: blue;
 }

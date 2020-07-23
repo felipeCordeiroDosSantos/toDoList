@@ -1,20 +1,23 @@
 function listToDoList(listTasksText) {
-  let listTasksArray = listTasksText.split(',')
+  let listTasksArray = listTasksText
   let toDoList = document.querySelector('#toDoList')
   toDoList.innerHTML = ''
-  for (let j = 1; j < listTasksArray.length; j++) {
-    toDoList.innerHTML += `Tarefa ${j}: ${listTasksArray[j]}  
-      <input type="button" value="Deletar" class="delete" onclick="deleteTask(${j})">
-      <input type="button" value="Editar" class="edit" onclick="expnadInputEdit(${j})">
-      <p id="edit${j}"></p>`
+  for (let j = 0; j < listTasksArray.length; j++) {
+    let hour = listTasksArray[j].hour.substring(0, 5)
+    toDoList.innerHTML += `Tarefa ${j}: ${listTasksArray[j].title}
+      | Horario: ${hour}
+      <input type="button" value="Deletar" class="delete" onclick="deleteTask(${listTasksArray[j].id})">
+      <input type="button" value="Editar" class="edit" onclick="expnadInputEdit(${listTasksArray[j].id})">
+      <p id="edit${listTasksArray[j].id}"></p>`
   }
 }
 
 function expnadInputEdit(taskIndex) {
   let index = document.querySelector(`#edit${taskIndex}`)
   if (index.innerHTML == '') {
-    index.innerHTML += `Editar tarefa: <input type="text" id="task${taskIndex}"></input>
-    <input type="button" value="Confirmar" onclick="updateTask(${taskIndex})">`
+    index.innerHTML += `Editar tarefa: <input type="text" id="task${taskIndex}" class="task"></input>
+    Horario: <input type="time" id="hour${taskIndex}" class="hour">
+    <input type="button" value="Confirmar" onclick="updateTask(${taskIndex})" class="add">`
   } else {
     index.innerHTML = ''
   }
@@ -22,7 +25,8 @@ function expnadInputEdit(taskIndex) {
 
 function addTask() {
   let newTask = document.querySelector('#task').value
-  const data = { newTask }
+  let newHour = document.querySelector('#hour').value
+  const data = { newTask, newHour }
   const options = {
     method: 'POST',
     headers: {
@@ -43,8 +47,9 @@ function addTask() {
 
 function updateTask(taskIndex) {
   let newTask = document.querySelector(`#task${taskIndex}`).value
+  let newHour = document.querySelector(`#hour${taskIndex}`).value
   let index = taskIndex
-  const data = { newTask, index }
+  const data = { newTask, newHour, index }
   const options = {
     method: 'PUT',
     headers: {

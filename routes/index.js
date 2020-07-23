@@ -9,8 +9,7 @@ const taskController = require('../controller/taskController')
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('index', { 
-    title: 'tdl',
+  res.render('index', {
     list: db.getDB()  
   });
 });
