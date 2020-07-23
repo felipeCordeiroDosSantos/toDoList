@@ -24,7 +24,7 @@ function getDB() {
 }
 
 function addTask(task, hour) {
-    let newtask = {
+    const newtask = {
         title: task,
         hour: hour,
         id_user: 1
