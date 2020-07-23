@@ -26,46 +26,54 @@ function expnadInputEdit(taskIndex) {
 function addTask() {
   const newTask = document.querySelector('#task').value
   const newHour = document.querySelector('#hour').value
-  const data = { newTask, newHour }
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  };
-  fetch('/add', options)
-  .then(function(res) {
-    if (res.status >= 400 && res.status <= 499) {
-      alert('Erro no cliente!')
-    } else if (res.status >= 500 && res.status <= 599) {
-      alert('Erro no servidor!')
-    }
-  })
-  refreshPage()
+  if (newTask == '' || newHour == '') {
+    alert('Campo vazio!')
+  }else {
+    const data = { newTask, newHour }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+    fetch('/add', options)
+    .then(function(res) {
+      if (res.status >= 400 && res.status <= 499) {
+        alert('Erro no cliente!')
+      } else if (res.status >= 500 && res.status <= 599) {
+        alert('Erro no servidor!')
+      }
+    })
+    refreshPage()
+  }
 }
 
 function updateTask(taskIndex) {
   const newTask = document.querySelector(`#task${taskIndex}`).value
   const newHour = document.querySelector(`#hour${taskIndex}`).value
   const index = taskIndex
-  const data = { newTask, newHour, index }
-  const options = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  };
-  fetch('/update', options)
-  .then(function(res) {
-    if (res.status >= 400 && res.status <= 499) {
-      alert('Erro no cliente!')
-    } else if (res.status >= 500 && res.status <= 599) {
-      alert('Erro no servidor!')
-    }
-  })
-  refreshPage()
+  if (newTask == '' || newHour == '') {
+    alert('Campo vazio!')
+  }else {
+    const data = { newTask, newHour, index }
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+    fetch('/update', options)
+    .then(function(res) {
+      if (res.status >= 400 && res.status <= 499) {
+        alert('Erro no cliente!')
+      } else if (res.status >= 500 && res.status <= 599) {
+        alert('Erro no servidor!')
+      }
+    })
+    refreshPage()
+  }
 }
 
 function deleteTask(taskIndex) {
