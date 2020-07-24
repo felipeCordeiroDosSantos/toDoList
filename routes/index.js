@@ -9,18 +9,15 @@ const taskController = require('../controller/taskController')
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('index', { 
-    title: 'tdl',
+  res.render('index', {
     list: db.getDB()  
   });
 });
 
-router.post('/adicionar', taskController.addTask)
+router.post('/add', taskController.addTask)
 
-router.put('/editar', taskController.updateTask)
+router.put('/update', taskController.updateTask)
 
-router.delete('/deletar', taskController.deleteTask)
-
-router.post('/mudar', taskController.changeTask)
+router.delete('/delete', taskController.deleteTask)
 
 module.exports = router;
