@@ -4,11 +4,10 @@ function listToDoList(listTasksText) {
   toDoList.innerHTML = ''
   for (let j = 0; j < listTasksArray.length; j++) {
     const hour = listTasksArray[j].hour.substring(0, 5)
-    toDoList.innerHTML += `Tarefa ${j}: ${listTasksArray[j].title}
-      | Horario: ${hour}
+    toDoList.innerHTML += `<li>${listTasksArray[j].title} | Horario: ${hour}
       <input type="button" value="Deletar" class="delete" onclick="deleteTask(${listTasksArray[j].id})">
       <input type="button" value="Editar" class="edit" onclick="expnadInputEdit(${listTasksArray[j].id})">
-      <p id="edit${listTasksArray[j].id}"></p>`
+      <p id="edit${listTasksArray[j].id}"></p></li>`
   }
 }
 
